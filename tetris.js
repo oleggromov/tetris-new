@@ -1,4 +1,4 @@
-(function (global) {
+(function (win, doc) {
     'use strict';
-    global.Tetris = require('./src/core');
-})(window);
+    win.Tetris = require('./src/core')(win, doc);
+})(window, document);
