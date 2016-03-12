@@ -1,0 +1,19 @@
+{
+  "name": "tetris",
+  "version": "0.0.1",
+  "description": "A simple tetris game made for educational purposes. ",
+  "main": "tetris.js",
+  "scripts": {
+    "build": "browserify tetris.js -o public/tetris.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tetris",
+    "game"
+  ],
+  "author": "Oleg Gromov <mail@oleggromov.com> (http://oleggromov.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "true-pubsub": "^1.0.0"
+  }
+}
