@@ -4,6 +4,17 @@ function Figure (type, color) {
     this._config = this.CONFIG[this.TYPES[type]];
 }
 
+Figure.prototype.forEachBrick = function (fn, ctx) {
+    ctx = ctx || undefined;
+    for (var y = 0; y < this._config.length; y++) {
+        for (var x = 0; x < this._config[y].length; x++) {
+            if (this._config[y][x] === 1) {
+                fn.call(ctx, this._left + x, this._top + y);
+            }
+        }
+    }
+};
+
 Figure.prototype.setLeft = function (left) {
     this._left = left;
     return this;
@@ -22,7 +33,7 @@ Figure.prototype.getTop = function () {
     return this._top;
 };
 
-Figure.prototype.getDrawMap = function () {
+Figure.prototype.getConfig = function () {
     return this._config;
 };
 
