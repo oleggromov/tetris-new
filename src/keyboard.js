@@ -1,5 +1,5 @@
 var PubSub = require('true-pubsub');
-var util = require('util');
+var inherits = require('util').inherits;
 
 module.exports = function (doc) {
 	function Keyboard () {
@@ -8,7 +8,7 @@ module.exports = function (doc) {
 		doc.addEventListener('keydown', this._translate);
 	}
 
-	util.inherits(Keyboard, PubSub);
+	inherits(Keyboard, PubSub);
 
 	Keyboard.prototype.destroy = function () {
 		doc.removeEventListener('keydown', this._translate);
