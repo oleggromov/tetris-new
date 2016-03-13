@@ -19,8 +19,7 @@ CanvasRenderer.prototype.draw = function (objects) {
 };
 
 CanvasRenderer.prototype._drawObject = function (figure) {
-    var color = figure.getColor();
-    figure.forEachBrick(function (left, top) {
+    figure.forEachBrick(function (left, top, color) {
         this._ctx.fillStyle = color;
         this._ctx.fillRect(left * this._brickSize, top * this._brickSize, this._brickSize, this._brickSize);
     }, this);
