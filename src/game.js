@@ -6,7 +6,7 @@ function Game (width, height) {
     this._points = 0;
     this._width = width;
     this._height = height;
-    this._well = new Well;
+    this._well = new Well(width, height);
     this._paused = false;
     this._delta = 0;
 
