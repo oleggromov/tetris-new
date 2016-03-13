@@ -19,24 +19,11 @@ CanvasRenderer.prototype.draw = function (objects) {
 };
 
 CanvasRenderer.prototype._drawObject = function (figure) {
-    var left = figure.getLeft();
-    var top = figure.getTop();
-
-    var drawMap = figure.getDrawMap();
     var color = figure.getColor();
-
-    for (var y = 0; y < drawMap.length; y++) {
-        for (var x = 0; x < drawMap[y].length; x++) {
-            if (drawMap[y][x] === 1) {
-                this._drawBrick(left + x, top + y, color);
-            }
-        }
-    }
-};
-
-CanvasRenderer.prototype._drawBrick = function (left, top, color) {
-    this._ctx.fillStyle = color;
-    this._ctx.fillRect(left * this._brickSize, top * this._brickSize, this._brickSize, this._brickSize);
+    figure.forEachBrick(function (left, top) {
+        this._ctx.fillStyle = color;
+        this._ctx.fillRect(left * this._brickSize, top * this._brickSize, this._brickSize, this._brickSize);
+    }, this);
 };
 
 CanvasRenderer.prototype.empty = function () {
