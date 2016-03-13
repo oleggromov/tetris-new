@@ -1,5 +1,5 @@
 var BrickSet = require('./brick-set');
-var inherits = require('util').inherits;
+var assign = require('lodash').assign;
 
 function Figure (type, color) {
     var bricks = Figure.prototype.TYPES[type];
@@ -8,7 +8,7 @@ function Figure (type, color) {
     BrickSet.call(this, bricks, color);
 }
 
-inherits(Figure, BrickSet);
+assign(Figure.prototype, BrickSet.prototype);
 
 Figure.prototype.TYPES = [
     [

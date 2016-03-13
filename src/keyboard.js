@@ -1,5 +1,5 @@
 var PubSub = require('true-pubsub');
-var inherits = require('util').inherits;
+var assign = require('lodash').assign;
 
 module.exports = function (doc) {
 	function Keyboard () {
@@ -8,7 +8,7 @@ module.exports = function (doc) {
 		doc.addEventListener('keydown', this._translate);
 	}
 
-	inherits(Keyboard, PubSub);
+	assign(Keyboard.prototype, PubSub.prototype);
 
 	Keyboard.prototype.destroy = function () {
 		doc.removeEventListener('keydown', this._translate);

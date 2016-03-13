@@ -1,5 +1,5 @@
 var PubSub = require('true-pubsub');
-var inherits = require('util').inherits;
+var assign = require('lodash').assign;
 
 module.exports = function (win) {
     function FrameController (fps) {
@@ -12,7 +12,7 @@ module.exports = function (win) {
         this._tick();
     }
 
-    inherits(FrameController, PubSub);
+    assign(FrameController.prototype, PubSub.prototype);
 
     FrameController.prototype.destroy = function () {
         win.cancelAnimationFrame(this._requestId);

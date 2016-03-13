@@ -1,22 +1,22 @@
 var BrickSet = require('./brick-set');
 var PubSub = require('true-pubsub');
-var inherits = require('util').inherits;
+var assign = require('lodash').assign;
 
 function Well () {
     BrickSet.call(this);
     PubSub.call(this);
 }
 
-inherits(Well, BrickSet);
-// inherits(PubSub, BrickSet);
+assign(Well.prototype, BrickSet.prototype, PubSub.prototype);
 
 Well.prototype.append = function (figure) {
+    this._check();
     console.warn(figure + ' appended');
 };
 
 Well.prototype._check = function () {
     if (true) {
-        // this.emit('line');
+        this.emit('line');
     }
 };
 

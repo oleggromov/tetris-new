@@ -6,7 +6,7 @@ function Game (width, height) {
     this._points = 0;
     this._width = width;
     this._height = height;
-    this._well = new Well;;
+    this._well = new Well;
     this._paused = false;
     this._delta = 0;
 
@@ -14,6 +14,10 @@ function Game (width, height) {
     this._changeFigure();
 
     this._direction = { left: 0, top: 1 };
+
+    this._well.on('line', function () {
+        console.warn('bingo!');
+    });
 };
 
 Game.prototype.update = function (delta) {
