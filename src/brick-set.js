@@ -1,5 +1,5 @@
 function BrickSet (bricks, color) {
-    this._bricks = bricks;
+    this._bricks = bricks || [[]];
 
     if (color) {
         this._each(function (brick, y, x) {
