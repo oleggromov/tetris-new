@@ -1,13 +1,17 @@
 var Game = require('./game');
 var CanvasRenderer = require('./canvas-renderer');
 
+var WIDTH = 16;
+var HEIGHT = 24;
+var BRICK_SIZE = 20;
+
 function core (win, doc) {
     var Fps = require('./fps')(win);
     var Keyboard = require('./keyboard')(doc);
 
     function Core (domRoot) {
-        this._game = new Game(16, 24);
-        this._renderer = new CanvasRenderer(domRoot, win, doc);
+        this._game = new Game(WIDTH, HEIGHT);
+        this._renderer = new CanvasRenderer(domRoot, doc, WIDTH, HEIGHT, BRICK_SIZE);
 
         this._input = new Keyboard();
         this._input.on('press', this.input.bind(this));

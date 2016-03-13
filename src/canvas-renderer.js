@@ -1,16 +1,16 @@
 var Figure = require('./figure');
 
-function CanvasRenderer (domRoot, win, doc) {
-    this._width = 320;
-    this._height = 480;
+function CanvasRenderer (domRoot, doc, width, height, brickSize) {
+    this._brickSize = brickSize;
+    this._width = width * brickSize;
+    this._height = height * brickSize;
 
-    this._root = document.querySelector(domRoot);
+    this._doc = doc;
+    this._root = doc.querySelector(domRoot);
     this._canvas = this._appendCanvas();
     this._ctx = this._canvas.getContext('2d');
 
     this.empty();
-
-    this._brickSize = 20;
 }
 
 CanvasRenderer.prototype.draw = function (objects) {
@@ -32,7 +32,7 @@ CanvasRenderer.prototype.empty = function () {
 };
 
 CanvasRenderer.prototype._appendCanvas = function () {
-    var canvas = document.createElement('canvas');
+    var canvas = this._doc.createElement('canvas');
     canvas.width = this._width;
     canvas.height = this._height;
     this._root.appendChild(canvas);
