@@ -1,48 +1,35 @@
-var FigureFactory = require('./figure-factory');
+var Game = require('./game');
 var CanvasRenderer = require('./canvas-renderer');
 
 function core (win, doc) {
     var Fps = require('./fps')(win);
     var Keyboard = require('./keyboard')(doc);
 
-    function Game (domRoot) {
-        this._figures = new FigureFactory();
+    function Core (domRoot) {
+        this._game = new Game(16, 24);
         this._renderer = new CanvasRenderer(domRoot, win, doc);
 
         this._input = new Keyboard();
-        this._fps = new Fps(80);
-
-        this._test = [this._figures.getCurrent(), this._figures.getNext()];
-        this._test[0].setLeft(0).setTop(0);
-        this._test[1].setLeft(5).setTop(5);
-
         this._input.on('press', this.input.bind(this));
+
+        this._fps = new Fps(80);
         this._fps.on('frame', this.update.bind(this));
     }
 
-    Game.prototype.input = function (type) {
-        if (type === 'left') {
-            this._test[0].setLeft(this._test[0].getLeft() - 1);
+    Core.prototype.input = function (type) {
+        if (type === 'pause') {
+            console.warn(this._game.triggerPause());
+        } else {
+            this._game.performAction(type);
         }
-
-        if (type === 'right') {
-            this._test[0].setLeft(this._test[0].getLeft() + 1);
-        }
-
-        if (type === 'down') {
-            this._test[0].setTop(this._test[0].getTop() + 1);
-        }
-
-        // if (type === 'down') {
-        //     this._test[0].setTop(this._test[0].getTop() + 1);
-        // }
     };
 
-    Game.prototype.update = function (deltaTime) {
-        this._renderer.draw(this._test);
+    Core.prototype.update = function (delta) {
+        this._game.update(delta);
+        this._renderer.draw(this._game.getObjects());
     };
 
-    return Game;
+    return Core;
 }
 
 module.exports = core;
