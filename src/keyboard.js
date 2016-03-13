@@ -5,13 +5,13 @@ module.exports = function (doc) {
 	function Keyboard () {
 		PubSub.call(this);
 		this._translate = this._translate.bind(this);
-		doc.addEventListener('keyup', this._translate);
+		doc.addEventListener('keydown', this._translate);
 	}
 
 	util.inherits(Keyboard, PubSub);
 
 	Keyboard.prototype.destroy = function () {
-		doc.removeEventListener('keyup', this._translate);
+		doc.removeEventListener('keydown', this._translate);
 	};
 
 	Keyboard.prototype._KEYS = {
