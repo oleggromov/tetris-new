@@ -6,7 +6,7 @@ var HEIGHT = 24;
 var BRICK_SIZE = 20;
 
 function core (win, doc) {
-    var Fps = require('./fps')(win);
+    var FrameController = require('./frame-contoller')(win);
     var Keyboard = require('./keyboard')(doc);
 
     function Core (domRoot) {
@@ -16,8 +16,8 @@ function core (win, doc) {
         this._input = new Keyboard();
         this._input.on('press', this.input.bind(this));
 
-        this._fps = new Fps(80);
-        this._fps.on('frame', this.update.bind(this));
+        this._frameController = new FrameController(80);
+        this._frameController.on('frame', this.update.bind(this));
     }
 
     Core.prototype.input = function (type) {

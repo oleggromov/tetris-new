@@ -1,8 +1,8 @@
 var PubSub = require('true-pubsub');
-var util = require('util');
+var inherits = require('util').inherits;
 
 module.exports = function (win) {
-    function Fps (fps) {
+    function FrameController (fps) {
         PubSub.call(this);
 
         this._interval = 1000 / fps;
@@ -12,13 +12,13 @@ module.exports = function (win) {
         this._tick();
     }
 
-    util.inherits(Fps, PubSub);
+    inherits(FrameController, PubSub);
 
-    Fps.prototype.destroy = function () {
+    FrameController.prototype.destroy = function () {
         win.cancelAnimationFrame(this._requestId);
     };
 
-    Fps.prototype._tick = function () {
+    FrameController.prototype._tick = function () {
         var now = Date.now();
         var delta = now - this._last;
 
@@ -30,5 +30,5 @@ module.exports = function (win) {
         this._requestId = win.requestAnimationFrame(this._tick);
     };
 
-    return Fps;
+    return FrameController;
 };
