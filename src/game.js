@@ -1,11 +1,12 @@
 var FigureFactory = require('./figure-factory');
+var Well = require('./well');
 
 function Game (width, height) {
     this._level = 0;
     this._points = 0;
     this._width = width;
     this._height = height;
-    this._inactive = [];
+    this._well = new Well;;
     this._paused = false;
     this._delta = 0;
 
@@ -39,20 +40,20 @@ Game.prototype.triggerPause = function () {
 
 Game.prototype.performAction = function (type) {
     if (type === 'left') {
-        this._direction.left--;
+        this._direction.left = -1;
     }
 
     if (type === 'right') {
-        this._direction.left++;
+        this._direction.left = 1;
     }
 
     if (type === 'down') {
-        this._direction.top++;
+        this._direction.top = 2;
     }
 };
 
 Game.prototype.getObjects = function () {
-    return this._inactive.concat(this._active);
+    return [this._active, this._well];
 };
 
 Game.prototype._checkCollisions = function () {
@@ -91,20 +92,14 @@ Game.prototype._collidesWithWals = function (nextLeft, nextTop) {
 Game.prototype._collidesWithInactive = function (nextLeft, nextTop) {
     var collision = false;
 
-    this._inactive.forEach(function (figure) {
+    this._well.forEachBrick(function (left, top) {
         if (collision) {
             return;
         }
 
-        figure.forEachBrick(function (left, top) {
-            if (collision) {
-                return;
-            }
-
-            if (nextLeft === left && nextTop === top) {
-                return collision = true;
-            }
-        }, this);
+        if (nextLeft === left && nextTop === top) {
+            return collision = true;
+        }
     }, this);
 
     return collision;
@@ -112,7 +107,7 @@ Game.prototype._collidesWithInactive = function (nextLeft, nextTop) {
 
 Game.prototype._changeFigure = function () {
     if (this._active) {
-        this._inactive.push(this._active);
+        this._well.append(this._active);
     }
 
     this._active = this._figures.getNext();
