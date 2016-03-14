@@ -1,3 +1,4 @@
+var FigureConfig = require('./config/figure');
 var BrickSet = require('./brick-set');
 var assign = require('lodash').assign;
 
@@ -8,42 +9,7 @@ function Figure (type, color) {
     BrickSet.call(this, bricks, color);
 }
 
+assign(Figure.prototype, FigureConfig);
 assign(Figure.prototype, BrickSet.prototype);
-
-Figure.prototype.TYPES = [
-    [
-        [1],
-        [1],
-        [1],
-        [1]
-    ],
-
-    [
-        [1, 1],
-        [1, 1]
-    ],
-
-    [
-        [1, 0],
-        [1, 1],
-        [1, 0]
-    ],
-
-    [
-        [0, 1],
-        [1, 1],
-        [1, 0]
-    ],
-
-    [
-        [1, 0],
-        [1, 1],
-        [0, 1]
-    ]
-];
-
-Figure.prototype.COLORS = [
-    '#f00', '#0f0', '#00f'
-];
 
 module.exports = Figure;
