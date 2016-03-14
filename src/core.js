@@ -16,7 +16,7 @@ function core (win, doc) {
         this._input = new Keyboard();
         this._input.on('press', this.input.bind(this));
 
-        this._frameController = new FrameController(80);
+        this._frameController = new FrameController();
         this._frameController.on('frame', this.update.bind(this));
     }
 

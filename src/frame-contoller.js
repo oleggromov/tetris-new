@@ -2,10 +2,9 @@ var PubSub = require('true-pubsub');
 var assign = require('lodash').assign;
 
 module.exports = function (win) {
-    function FrameController (fps) {
+    function FrameController () {
         PubSub.call(this);
 
-        this._interval = 1000 / fps;
         this._tick = this._tick.bind(this);
         this._last = Date.now();
 
@@ -20,12 +19,8 @@ module.exports = function (win) {
 
     FrameController.prototype._tick = function () {
         var now = Date.now();
-        var delta = now - this._last;
-
-        if (delta >= this._interval) {
-            this.emit('frame', delta);
-            this._last = now;
-        }
+        this.emit('frame', now - this._last);
+        this._last = now;
 
         this._requestId = win.requestAnimationFrame(this._tick);
     };
