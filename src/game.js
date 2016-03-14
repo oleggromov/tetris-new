@@ -34,8 +34,8 @@ Game.prototype.update = function (delta) {
         if (this._checkCollisions()) {
             this._changeFigure();
         } else {
-            this._active.setTop(this._active.getTop() + this._direction.top);
-            this._active.setLeft(this._active.getLeft() + this._direction.left);
+            this._active.set('top', this._active.get('top') + this._direction.top);
+            this._active.set('left', this._active.get('left') + this._direction.left);
         }
         this._direction = { left: 0, top: 1 };
         this._delta = 0;
@@ -119,8 +119,8 @@ Game.prototype._changeFigure = function () {
     }
 
     this._active = this._figures.getNext();
-    this._active.setTop(0);
-    this._active.setLeft(Math.floor(this._width / 2) - 1);
+    this._active.set('top', 0);
+    this._active.set('left', Math.floor(this._width / 2) - 1);
 };
 
 Game.prototype._getSpeedDelta = function () {

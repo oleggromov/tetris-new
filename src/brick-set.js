@@ -14,7 +14,7 @@ BrickSet.prototype.forEachBrick = function (fn, ctx) {
     ctx = ctx || undefined;
 
     this._each(function (brick, y, x) {
-        fn.call(ctx, this._left + x, this._top + y, this._bricks[y][x]);
+        fn.call(ctx, this.left + x, this.top + y, this._bricks[y][x]);
     });
 };
 
@@ -31,22 +31,20 @@ BrickSet.prototype._each = function (fn) {
     }
 };
 
-BrickSet.prototype.setLeft = function (left) {
-    this._left = left;
-    return this;
+BrickSet.prototype._PUBLIC = ['left', 'top'];
+
+BrickSet.prototype.set = function (prop, value) {
+
+    if (this._PUBLIC.indexOf(prop) > -1) {
+        this[prop] = value;
+        return this;
+    }
 };
 
-BrickSet.prototype.setTop = function (top) {
-    this._top = top;
-    return this;
-};
-
-BrickSet.prototype.getLeft = function () {
-    return this._left;
-};
-
-BrickSet.prototype.getTop = function () {
-    return this._top;
+BrickSet.prototype.get = function (prop) {
+    if (this._PUBLIC.indexOf(prop) > -1) {
+        return this[prop];
+    }
 };
 
 module.exports = BrickSet;
