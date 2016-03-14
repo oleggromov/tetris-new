@@ -15,8 +15,6 @@ BrickSet.prototype.forEachBrick = function (fn, ctx) {
 };
 
 BrickSet.prototype._each = function (fn) {
-    var height = this._bricks.length;
-
     this._bricks.forEach(function (row, y) {
         row.forEach(function (brick, x) {
             if (brick) {
