@@ -1,5 +1,5 @@
 var PubSub = require('true-pubsub');
-var assign = require('lodash').assign;
+var extend = require('extend');
 
 module.exports = function (win) {
     function FrameController () {
@@ -11,7 +11,7 @@ module.exports = function (win) {
         this._tick();
     }
 
-    assign(FrameController.prototype, PubSub.prototype);
+    extend(FrameController.prototype, PubSub.prototype);
 
     FrameController.prototype.destroy = function () {
         win.cancelAnimationFrame(this._requestId);

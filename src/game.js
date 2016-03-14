@@ -1,7 +1,7 @@
 var GameConfig = require('./config/game');
 var FigureFactory = require('./figure-factory');
 var Well = require('./well');
-var assign = require('lodash').assign;
+var extend = require('extend');
 
 function Game (width, height) {
     this._level = 0;
@@ -22,7 +22,7 @@ function Game (width, height) {
     });
 };
 
-assign(Game.prototype, GameConfig);
+extend(Game.prototype, GameConfig);
 
 Game.prototype.update = function (delta) {
     if (this._paused) {

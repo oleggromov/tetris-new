@@ -1,5 +1,5 @@
 var PubSub = require('true-pubsub');
-var assign = require('lodash').assign;
+var extend = require('extend');
 
 module.exports = function (doc) {
 	function Keyboard () {
@@ -8,7 +8,7 @@ module.exports = function (doc) {
 		doc.addEventListener('keydown', this._translate);
 	}
 
-	assign(Keyboard.prototype, PubSub.prototype);
+	extend(Keyboard.prototype, PubSub.prototype);
 
 	Keyboard.prototype.destroy = function () {
 		doc.removeEventListener('keydown', this._translate);

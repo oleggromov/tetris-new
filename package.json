@@ -14,7 +14,7 @@
   "author": "Oleg Gromov <mail@oleggromov.com> (http://oleggromov.com)",
   "license": "ISC",
   "devDependencies": {
-    "lodash": "^4.6.1",
+    "extend": "^3.0.0",
     "true-pubsub": "^1.0.0"
   }
 }

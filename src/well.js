@@ -1,6 +1,6 @@
 var BrickSet = require('./brick-set');
 var PubSub = require('true-pubsub');
-var assign = require('lodash').assign;
+var extend = require('extend');
 
 function Well (width, height) {
     BrickSet.call(this);
@@ -10,7 +10,7 @@ function Well (width, height) {
     this._maxHeight = height;
 }
 
-assign(Well.prototype, BrickSet.prototype, PubSub.prototype);
+extend(Well.prototype, BrickSet.prototype, PubSub.prototype);
 
 Well.prototype.append = function (figure) {
     this._check();
