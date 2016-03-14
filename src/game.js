@@ -67,13 +67,13 @@ Game.prototype.getObjects = function () {
 Game.prototype._checkCollisions = function () {
     var collision = false;
 
-    this._active.forEachBrick(function (left, top) {
+    this._active.forEachBrick(function (x, y) {
         if (collision) {
             return;
         }
 
-        var nextLeft = this._direction.left + left;
-        var nextTop = this._direction.top + top;
+        var nextLeft = this._direction.left + x;
+        var nextTop = this._direction.top + y;
 
         if (this._collidesWithWals(nextLeft, nextTop)) {
             return collision = true;
